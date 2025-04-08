@@ -14,4 +14,5 @@ public class Promoter {
     private String panCard;
      private String address;
 
+
 }

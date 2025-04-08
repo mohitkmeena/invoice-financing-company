@@ -23,14 +23,22 @@ public class Company{
     private Set<Promoter> promoters;
     private String panCard;
     private String gstIn;
-    private String cin;
+
     private String logo;
     private boolean isPanVerified;
-    private boolean isCinVerified;
+
     private boolean isGstInVerified;
     @Email
     private String email;
     private String phoneNumber;
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Set<Invoice>invoices;
+    private boolean isVerified;
+
+    @PrePersist
+    public void setisVerified(){
+        this.isPanVerified=false;
+        this.isGstInVerified=false;
+        this.isVerified=false;
+    }
 }

@@ -9,10 +9,11 @@ import org.springframework.stereotype.Service;
 public class CompanyConsumer {
 
     @KafkaListener(topics = "${spring.kafka.company-topic-name}",groupId = "${spring.kafka.consumer.group-id}")
-    public void consume(CompanyDto companyDto){
+    public void consume(CompanyUserDto companyDto){
 
       //  System.out.println("Message received from investor topic: "+message);
         System.out.println("Company received from investor topic: "+companyDto);
+
     }
 
 }

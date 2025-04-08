@@ -19,8 +19,6 @@ import java.util.Set;
 @Getter
 @Setter
 @Builder
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-@JsonIgnoreProperties(ignoreUnknown=true)
 @ToString
 public class CompanyDto {
 
@@ -29,13 +27,12 @@ public class CompanyDto {
     private Set<Promoter> promoters;
     private String panCard;
     private String gstIn;
-    private String cin;
+
     private String logo;
     private boolean isPanVerified;
-    private boolean isCinVerified;
     private boolean isGstInVerified;
     private String email;
-    @JsonProperty("phone_number")
+
     private String phoneNumber;
     private Set<Invoice>invoices;
 }
