@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/company/v1/promoters")
 public class PromoterController {
@@ -21,9 +23,14 @@ public class PromoterController {
     public ResponseEntity<ResponseDto>removePromoter(@RequestHeader(name = "X-User-ID") String companyId,@RequestBody PromoterDto promoterDto ){
         return promoterService.removePromoter(companyId,promoterDto);
     }
-    @PatchMapping("/update-promoter")
+    @PutMapping("/update-promoter")
     public ResponseEntity<ResponseDto>updatePromoter(@RequestHeader(name = "X-User-ID") String companyId,@RequestBody PromoterDto promoterDto ){
         return promoterService.removePromoter(companyId,promoterDto);
     }
+    @GetMapping("/get-promoters")
+    public List<PromoterDto> getPromoters(@RequestHeader(name = "X-User-ID") String companyId){
+        return promoterService.getPromoters(companyId);
+    }
+
 
 }

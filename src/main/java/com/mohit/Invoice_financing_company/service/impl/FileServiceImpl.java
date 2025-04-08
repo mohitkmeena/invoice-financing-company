@@ -41,7 +41,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public String uploadInvoice(MultipartFile file, String companyId) throws IOException {
+    public String uploadInvoice(MultipartFile file, String companyId)  {
         String name = companyId+"_invoice"+file.getOriginalFilename();
         String filePath = INVOICES_PATH + File.separator +name;
 
@@ -50,37 +50,57 @@ public class FileServiceImpl implements FileService {
         if (!f.exists()) {
             f.mkdirs();
         }
-        //copy file or upload
-        Files.copy(file.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
-        return name;
-    }
-
-    @Override
-    public InputStream getInvoice( String fileName, String companyId) throws FileNotFoundException {
-        String filepath =INVOICES_PATH+ File.separator + fileName;
-        return new FileInputStream(filepath);
-    }
-
-    @Override
-    public String uploadLogo(MultipartFile file, String companyId) throws IOException {
-        String name = companyId+"_logo"+file.getOriginalFilename();
-        String filePath = LOGO_PATH + File.separator +name;
-
-        //create a file object
-        File f = new File(LOGO_PATH);
-        if (!f.exists()) {
-            f.mkdirs();
+        try {
+            //copy file or upload
+            Files.copy(file.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
+            return name;
+        }catch (IOException e){
+            return null;
         }
-        //copy file or upload
-        Files.copy(file.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
-        return name;
-
     }
 
     @Override
-    public InputStream getLogo(String fileName, String companyId) throws FileNotFoundException {
-        String filepath = LOGO_PATH+ File.separator + fileName;
-        return new FileInputStream(filepath);
+    public InputStream getInvoice( String fileName, String companyId)  {
+        try {
+            String filepath = INVOICES_PATH + File.separator + fileName;
+            return new FileInputStream(filepath);
+        }
+        catch (FileNotFoundException e){
+            return null;
+        }
+    }
+
+    @Override
+    public String uploadLogo(MultipartFile file, String companyId)  {
+        try {
+            String name = companyId + "_logo" + file.getOriginalFilename();
+            String filePath = LOGO_PATH + File.separator + name;
+
+            //create a file object
+            File f = new File(LOGO_PATH);
+            if (!f.exists()) {
+                f.mkdirs();
+            }
+            //copy file or upload
+            Files.copy(file.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
+            return name;
+        }
+        catch (IOException e){
+            return null;
+        }
+    }
+
+    @Override
+    public InputStream getLogo(String fileName, String companyId)  {
+        try {
+
+
+            String filepath = LOGO_PATH + File.separator + fileName;
+            return new FileInputStream(filepath);
+        }
+        catch (FileNotFoundException e){
+            return null;
+        }
 
     }
 }

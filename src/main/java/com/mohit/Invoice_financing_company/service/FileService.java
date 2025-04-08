@@ -8,10 +8,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface FileService {
 
-    String uploadInvoice(MultipartFile file,String companyId) throws IOException;
-    InputStream getInvoice(String fileName,String companyId) throws FileNotFoundException;
-    String uploadLogo(MultipartFile file,String companyId) throws IOException;
-    InputStream getLogo(String fileName,String companyId) throws FileNotFoundException;
+    String uploadInvoice(MultipartFile file,String companyId) ;
+    InputStream getInvoice(String fileName,String companyId) ;
+    String uploadLogo(MultipartFile file,String companyId) ;
+    InputStream getLogo(String fileName,String companyId) ;
 
 
 }

@@ -19,22 +19,20 @@ public class FileController {
     @Autowired
     private FileService fileService;
 
-    @Value("${project.poster}")
-    private String path;
 
-    @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(@RequestPart MultipartFile file) throws IOException {
 
-       // String uploadedFileName= fileService.uploadFile(path, file);
-       // return ResponseEntity.ok("file uplaoded "+uploadedFileName);
-        return null;
 
+    @GetMapping(value = "/invoice/{fileName}")
+    public void getInvoice(@PathVariable String fileName, HttpServletResponse res,@RequestHeader("X-User-Id") String companyId) throws IOException{
+        InputStream ips=fileService.getInvoice( fileName,companyId);
+        res.setContentType(MediaType.APPLICATION_PDF_VALUE);
+        StreamUtils.copy(ips, res.getOutputStream());
     }
-    @GetMapping(value = "/{fileName}")
-    public void getFile(@PathVariable String fileName, HttpServletResponse res) throws IOException{
-//        InputStream ips=fileService.getResource(path, fileName);
-//        res.setContentType(MediaType.IMAGE_PNG_VALUE);
-//        StreamUtils.copy(ips, res.getOutputStream());
+    @GetMapping(value = "/logo/{fileName}")
+    public void getlogo(@PathVariable String fileName, HttpServletResponse res,@RequestHeader("X-User-Id") String companyId) throws IOException{
+        InputStream ips=fileService.getLogo(fileName, companyId);
+        res.setContentType(MediaType.IMAGE_PNG_VALUE);
+        StreamUtils.copy(ips, res.getOutputStream());
     }
 
 }

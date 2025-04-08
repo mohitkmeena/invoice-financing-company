@@ -1,9 +1,11 @@
 package com.mohit.Invoice_financing_company.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.apache.kafka.common.annotation.InterfaceStability;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
@@ -12,6 +14,8 @@ import java.util.Date;
 @RequiredArgsConstructor
 @Getter
 @Setter
+@Builder
+@Table(name = "invoices")
 public class Invoice {
     @Id
     private String invoiceId;

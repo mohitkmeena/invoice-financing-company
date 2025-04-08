@@ -2,6 +2,7 @@ package com.mohit.Invoice_financing_company.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.Set;
@@ -34,7 +35,9 @@ public class Company{
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Set<Invoice>invoices;
     private boolean isVerified;
-
+    @OneToOne(mappedBy = "company", cascade = CascadeType.ALL)
+    @NotBlank(message = "Bank details cannot be blank")
+    private BankDetails bankDetails;
     @PrePersist
     public void setisVerified(){
         this.isPanVerified=false;
